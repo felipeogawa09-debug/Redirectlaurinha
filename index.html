@@ -3,239 +3,239 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Conteúdo Exclusivo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Exclusivo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            text-align: center;
+        }
 
-body {
-    height: 100dvh;
-    width: 100vw;
-    overflow: hidden;
-    font-family: system-ui, -apple-system, sans-serif;
-    background: radial-gradient(circle at top, #0b132b, #000);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-}
+        .main-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 30px 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
 
-/* CARD PRINCIPAL */
-.wrapper {
-    position: relative;
-    width: 90%;
-    max-width: 360px;
-    aspect-ratio: 3 / 4;
-    border-radius: 26px;
-    overflow: hidden;
-    background: #000; /* Fundo base preto */
-    box-shadow: 0 0 40px rgba(255, 122, 223, 0.15);
-}
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, #ff0000, #ff5f5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-/* CONTEÚDO QUE APARECE DEPOIS */
-.hidden-content {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-    background: linear-gradient(180deg, #0b132b, #000);
-    z-index: 1;
-}
+        /* --- TUTORIAL EM TEXTO (TOPO) --- */
+        .tutorial-text {
+            text-align: left;
+            margin-bottom: 20px;
+        }
 
-.hidden-content h1 {
-    font-size: 2rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, #fff, #ffd6f6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-}
+        .step-item {
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+        }
 
-.hidden-content p {
-    font-size: 1rem;
-    opacity: 0.8;
-}
+        .step-number {
+            background: #ff0000;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 0.8rem;
+        }
 
-/* CANVAS (A CAMADA QUE SERÁ RASPADA) */
-#scratchCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10; /* Fica no topo de tudo */
-    touch-action: none;
-    cursor: crosshair;
-}
+        .gif-box {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 2px solid #222;
+        }
 
-/* TEXTO SOBRE A RASPADINHA (ORIENTAÇÃO) */
-.overlay-instruction {
-    position: absolute;
-    inset: 0;
-    z-index: 11; /* Acima do canvas, mas sem bloquear toque */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none; /* Permite que o toque passe para o canvas abaixo */
-    transition: opacity 0.5s ease;
-}
+        .gif-box img { width: 100%; display: block; }
 
-.overlay-instruction span { font-size: 3.5rem; margin-bottom: 10px; }
-.overlay-instruction strong { 
-    font-size: 1.1rem; 
-    letter-spacing: 2px; 
-    text-transform: uppercase; 
-    color: #fff;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
+        .btn-check {
+            width: 100%;
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 18px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
 
-.hint {
-    position: absolute;
-    bottom: 25px;
-    width: 100%;
-    text-align: center;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    opacity: 0.6;
-    z-index: 12;
-    pointer-events: none;
-}
-</style>
+        /* --- MODAIS --- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: #111;
+            border: 1px solid #333;
+            padding: 25px;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        .alert-box {
+            background: rgba(255, 59, 59, 0.1);
+            border: 1px solid #ff3b3b;
+            color: #ff3b3b;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .btn-group { display: flex; gap: 10px; }
+
+        .btn-modal {
+            flex: 1;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-yes { background: #ff3b3b; color: #fff; }
+        .btn-no { background: #333; color: #fff; }
+
+        .btn-final {
+            display: none;
+            background: linear-gradient(135deg, #00ff88, #008855);
+            color: #000;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 18px;
+            font-weight: 900;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="wrapper">
-    <div class="hidden-content">
-        <h1>CONTEÚDO LIBERADO</h1>
-        <p>Você ganhou acesso exclusivo.</p>
+<div class="container">
+    <div class="main-card">
+        <h1>PASSO A PASSO</h1>
+        
+        <div class="tutorial-text">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <span>Toque nos <b>3 pontos</b> (canto superior)</span>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <span>Selecione <b>"Abrir no Navegador"</b></span>
+            </div>
+        </div>
+
+        <div class="gif-box">
+            <img src="https://i.imgur.com/kUc695D.gif" alt="Tutorial GIF">
+        </div>
+
+        <button class="btn-check" id="btnStep1" onclick="openModal('modal1')">JÁ TERMINEI O TUTORIAL</button>
+        
+        <a href="https://t.me/LaurinhaKalimannbot" id="btnFinal" class="btn-final">ACESSAR SURPRESA ESPECIAL</a>
     </div>
+</div>
 
-    <canvas id="scratchCanvas"></canvas>
-
-    <div class="overlay-instruction" id="overlayText">
-        <span>🤫</span>
-        <strong>RASPE PARA VER</strong>
+<div id="modal1" class="modal-overlay">
+    <div class="modal-card">
+        <h2>Concluiu os passos?</h2>
+        <p style="color:#aaa; margin-top:10px;">Você realmente abriu esta página no seu navegador nativo?</p>
+        <div class="btn-group" style="margin-top:20px;">
+            <button class="btn-modal btn-yes" onclick="openModal('modal2')">SIM, CONCLUÍ</button>
+            <button class="btn-modal btn-no" onclick="closeModals()">Ainda não</button>
+        </div>
     </div>
+</div>
 
-    <div class="hint">Use o dedo para descobrir</div>
-</div>	
+<div id="modal2" class="modal-overlay">
+    <div class="modal-card">
+        <h2 style="color:#ff3b3b;">TEM CERTEZA?</h2>
+        <div class="alert-box">
+            <b>⚠️ ATENÇÃO:</b><br>
+             Para você acessar nosso <b>Grupo Secreto</b> precisa seguir o tutorial
+        </div>
+        <div class="btn-group">
+            <button class="btn-modal btn-yes" onclick="showFinalButton()">TENHO CERTEZA</button>
+            <button class="btn-modal btn-no" onclick="closeModals()">Vou abrir agora</button>
+        </div>
+    </div>
+</div>
 
 <script>
-const canvas = document.getElementById('scratchCanvas');
-const ctx = canvas.getContext('2d');
-const overlayText = document.getElementById('overlayText');
-
-let isDrawing = false;
-let unlocked = false;
-
-function setupCanvas() {
-    // Pega o tamanho exato do contêiner wrapper
-    const container = canvas.parentElement;
-    canvas.width = container.offsetWidth;
-    canvas.height = container.offsetHeight;
-
-    // Criar a tinta da raspadinha (cinza premium)
-    ctx.globalCompositeOperation = 'source-over';
-    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, '#888');
-    gradient.addColorStop(0.5, '#555');
-    gradient.addColorStop(1, '#333');
-    
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    // Configura para "apagar" o que for desenhado
-    ctx.globalCompositeOperation = 'destination-out';
-}
-
-// Inicializa no load e no resize
-window.addEventListener('load', setupCanvas);
-window.addEventListener('resize', setupCanvas);
-
-function getPointerPos(e) {
-    const rect = canvas.getBoundingClientRect();
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    return {
-        x: clientX - rect.left,
-        y: clientY - rect.top
-    };
-}
-
-function handleScratch(e) {
-    if (!isDrawing || unlocked) return;
-    
-    // Esconde o texto central assim que começa a raspar
-    overlayText.style.opacity = '0';
-    
-    const { x, y } = getPointerPos(e);
-    
-    ctx.beginPath();
-    ctx.arc(x, y, 35, 0, Math.PI * 2);
-    ctx.fill();
-    
-    checkPercent();
-}
-
-function checkPercent() {
-    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    let cleared = 0;
-    for (let i = 3; i < data.length; i += 64) { // Pula pixels para performance
-        if (data[i] === 0) cleared++;
+    function openModal(id) {
+        closeModals();
+        document.getElementById(id).style.display = 'flex';
     }
-    
-    if (cleared / (data.length / 64) > 0.5) {
-        finishReveal();
-    }
-}
 
-function finishReveal() {
-    if (unlocked) return;
-    unlocked = true;
-    canvas.style.transition = 'opacity 1s ease';
-    canvas.style.opacity = '0';
-    
-    setTimeout(() => {
+    function closeModals() {
+        const modals = document.querySelectorAll('.modal-overlay');
+        modals.forEach(m => m.style.display = 'none');
+    }
+
+    function showFinalButton() {
+        closeModals();
+        document.getElementById('btnStep1').style.display = 'none';
+        const btnFinal = document.getElementById('btnFinal');
+        btnFinal.style.display = 'block';
+        
+        // Passa parâmetros da URL se existirem
         const params = window.location.search;
-        window.location.href = 'https://t.me/LaurinhaKalimannbot' + params;
-    }, 1200);
-}
-
-// Eventos Mouse
-canvas.addEventListener('mousedown', () => isDrawing = true);
-window.addEventListener('mouseup', () => isDrawing = false);
-window.addEventListener('mousemove', handleScratch);
-
-// Eventos Touch (Mobile)
-canvas.addEventListener('touchstart', (e) => {
-    isDrawing = true;
-    handleScratch(e);
-    e.preventDefault();
-}, { passive: false });
-
-window.addEventListener('touchmove', (e) => {
-    handleScratch(e);
-    e.preventDefault();
-}, { passive: false });
-
-window.addEventListener('touchend', () => isDrawing = false);
-
+        if (params && !btnFinal.href.includes('?')) {
+            btnFinal.href += params;
+        }
+    }
 </script>
+
 
   <script>
     
